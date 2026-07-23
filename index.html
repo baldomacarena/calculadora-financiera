@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Proyección Financiera</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page">
+
+  <header class="hero">
+    <p class="hero-tag">Herramienta gratuita</p>
+    <h1>Calculadora de Proyección Financiera</h1>
+    <p class="hero-sub">Cargá tus cuentas, tus ingresos y tus compromisos, y sabé en segundos si vas a estar en positivo, equilibrado o en déficit.</p>
+  </header>
+
+  <main class="card form-card">
+
+    <section class="block">
+      <div class="block-head">
+        <h2><span class="step">1</span> Tus cuentas</h2>
+        <p class="block-hint">Bancos, billeteras virtuales o efectivo.</p>
+      </div>
+      <div id="cuentas-list" class="rows-list"></div>
+      <button type="button" id="add-cuenta" class="btn-add">+ Agregar cuenta</button>
+    </section>
+
+    <section class="block">
+      <div class="block-head">
+        <h2><span class="step">2</span> Período a proyectar</h2>
+        <p class="block-hint">¿Cuántos días hacia adelante querés ver tu saldo?</p>
+      </div>
+      <div class="periodo-row">
+        <input type="number" id="dias" min="1" value="30" class="input-dias">
+        <span class="periodo-label">días</span>
+        <div class="chips">
+          <button type="button" class="chip" data-dias="1">Día</button>
+          <button type="button" class="chip" data-dias="7">Semana</button>
+          <button type="button" class="chip" data-dias="30">Mes</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="block-head">
+        <h2><span class="step">3</span> Ingresos proyectados</h2>
+        <p class="block-hint">¿Cómo querés estimarlos?</p>
+      </div>
+      <div class="toggle-group">
+        <label class="toggle-option">
+          <input type="radio" name="modo-ingreso" value="total" checked>
+          <span>Monto total del período</span>
+        </label>
+        <label class="toggle-option">
+          <input type="radio" name="modo-ingreso" value="promedio">
+          <span>Promedio diario</span>
+        </label>
+      </div>
+      <div class="ingreso-inputs">
+        <div id="ingreso-total-wrap" class="input-with-prefix">
+          <span>$</span>
+          <input type="number" id="ingreso-total" min="0" placeholder="0.00">
+        </div>
+        <div id="ingreso-promedio-wrap" class="input-with-prefix" style="display:none;">
+          <span>$</span>
+          <input type="number" id="ingreso-promedio" min="0" placeholder="0.00">
+          <span class="suffix">/ día</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="block-head">
+        <h2><span class="step">4</span> Compromisos</h2>
+        <p class="block-hint">Pagos previstos para este período: cheques, transferencias, etc.</p>
+      </div>
+      <div id="compromisos-list" class="rows-list"></div>
+      <button type="button" id="add-compromiso" class="btn-add">+ Agregar compromiso</button>
+    </section>
+
+    <div class="actions">
+      <button type="button" id="calcular" class="btn-primary">Calcular proyección</button>
+      <button type="button" id="limpiar" class="btn-ghost">Limpiar todo</button>
+    </div>
+
+  </main>
+
+  <div id="resultado" class="card result-card hidden"></div>
+
+  <footer class="footer">
+    Calculadora simple y gratuita. No guarda ni envía tus datos a ningún servidor — todo se calcula y se guarda en tu propio navegador.
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
