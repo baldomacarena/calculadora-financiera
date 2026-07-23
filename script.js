@@ -198,10 +198,11 @@ document.getElementById("calcular").addEventListener("click", () => {
   const dias = parseInt(document.getElementById("dias").value) || 1;
   const modoIngreso = document.querySelector('input[name="modo-ingreso"]:checked').value;
   let ingresos = 0;
+  let promedio = 0;
   if (modoIngreso === "total") {
     ingresos = parseFloat(document.getElementById("ingreso-total").value) || 0;
   } else {
-    const promedio = parseFloat(document.getElementById("ingreso-promedio").value) || 0;
+    promedio = parseFloat(document.getElementById("ingreso-promedio").value) || 0;
     ingresos = promedio * dias;
   }
 
@@ -234,11 +235,23 @@ document.getElementById("calcular").addEventListener("click", () => {
     <div class="result-body">
       ${seccion("Saldos disponibles", formatearFecha(hoy), filasDisp, "Total disponible", totalDisponible)}
       ${seccion("Saldos a liberar", formatearFecha(hoy), filasLib, "Total a liberar", totalLiberar)}
+
+      <div class="r-section">
+        <p style="margin:0 0 6px;">
+          <span class="r-label">Ingresos proyectados</span>
+          <span class="r-sub"> · al ${formatearFecha(fechaProyeccion)}</span>
+        </p>
+        ${modoIngreso === "promedio"
+          ? fila(`${formatear(promedio)}/día × ${dias} días`, ingresos, true)
+          : fila("Monto proyectado", ingresos, true)}
+      </div>
+      <div class="r-divider"></div>
+
       ${seccion("Compromisos", formatearFecha(fechaProyeccion), filasComp, "Total compromisos", totalCompromisos)}
 
       <div class="r-section">
         <p style="margin:0 0 6px;">
-          <span class="r-label">Saldo proyectado</span>
+          <span class="r-label">Resumen</span>
           <span class="r-sub"> · al ${formatearFecha(fechaProyeccion)}</span>
         </p>
         ${fila("Total disponible", totalDisponible)}
