@@ -195,7 +195,8 @@ document.getElementById("calcular").addEventListener("click", () => {
     }))
     .filter(k => k.importe > 0);
 
-  const dias = parseInt(document.getElementById("dias").value) || 1;
+  const diasIngresados = parseInt(document.getElementById("dias").value);
+  const dias = Number.isNaN(diasIngresados) || diasIngresados < 1 ? 1 : diasIngresados;
   const modoIngreso = document.querySelector('input[name="modo-ingreso"]:checked').value;
   let ingresos = 0;
   let promedio = 0;
@@ -220,8 +221,12 @@ document.getElementById("calcular").addEventListener("click", () => {
   const fechaProyeccion = new Date();
   fechaProyeccion.setDate(hoy.getDate() + dias);
 
-  const filasDisp = cuentas.map(c => fila(c.nombre, c.disponible)).join("");
-  const filasLib = cuentas.map(c => fila(c.nombre, c.liberar)).join("");
+  const filasDisp = cuentas.length
+    ? cuentas.map(c => fila(c.nombre, c.disponible)).join("")
+    : fila("Sin cuentas cargadas", 0);
+  const filasLib = cuentas.length
+    ? cuentas.map(c => fila(c.nombre, c.liberar)).join("")
+    : fila("Sin cuentas cargadas", 0);
   const filasComp = compromisos.length
     ? compromisos.map(k => fila(k.concepto, k.importe)).join("")
     : fila("Sin compromisos cargados", 0);
