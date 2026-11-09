@@ -1,4 +1,4 @@
-# 🧮 Calculadora de Proyección Financiera
+# 💵 Calculadora de Proyección Financiera
 
 🔗 **Ver la app online en GIT PAGES:** [baldomacarena.github.io/calculadora-financiera](https://baldomacarena.github.io/calculadora-financiera/)
 
